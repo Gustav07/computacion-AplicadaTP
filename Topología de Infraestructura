@@ -19,7 +19,7 @@
       │   SSH     │        │   Apache2   │           │  MariaDB   │
       │ Puerto:XX │        │ index.php   │           │ db.sql     │
       │ LLave RSA │        │ logo.png    │           └────────────┘
-      └───────────┘        └─────┬────────┘
+      └───────────┘        └─────┬───────┘
                                  │
                        DocumentRoot → /www_dir
                                  │
