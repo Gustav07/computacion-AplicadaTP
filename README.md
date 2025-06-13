@@ -1,3 +1,6 @@
 # computacion-AplicadaTP
 Integrantes:
- Alvarez Romero Carlos Gustavo Legajo:0147372 
+ Agustín Ariel Acosta
+ Matias Gabriel Arias
+ Tobias Alvarez Colodrero
+ Alvarez Romero Carlos Gustavo 
