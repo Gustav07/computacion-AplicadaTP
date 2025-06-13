@@ -1,0 +1,50 @@
+                     ┌────────────────────────────┐
+                     │     Máquina Física (host)  │
+                     │ IP: 192.168.x.x            │
+                     │ SO:  Windows               │
+                     └────────────┬───────────────┘
+                                  │
+                       Red Interna (Bridged/NAT)
+                                  │
+                     ┌────────────▼──────────────┐
+                     │     Máquina Virtual       │
+                     │    Debian GNU/Linux       │
+                     │ Hostname: TPServer        │
+                     │ IP: 192.168.x.x (estática)│
+                     └────────────┬──────────────┘
+                                  │
+            ┌─────────────────────┼────────────────────────┐
+            │                     │                        │
+      ┌─────▼─────┐        ┌──────▼──────┐           ┌─────▼──────┐
+      │   SSH     │        │   Apache2   │           │  MariaDB   │
+      │ Puerto:XX │        │ index.php   │           │ db.sql     │
+      │ LLave RSA │        │ logo.png    │           └────────────┘
+      └───────────┘        └─────┬────────┘
+                                 │
+                       DocumentRoot → /www_dir
+                                 │
+                      (montado desde disco nuevo)
+
+            ┌────────────────────────────────────────────────┐
+            │           Disco adicional (10 GB)              │
+            │  ┌──────────────┐     ┌────────────────────┐   │
+            │  │ Partición 1  │     │ Partición 2        │   │
+            │  │ /www_dir     │     │ /backup_dir        │   │
+            │  │ (3 GB)       │     │ (6 GB)             │   │
+            │  └──────────────┘     └────────────────────┘   │
+            └────────────────────────────────────────────────┘
+
+                                ▼
+                   /opt/scripts/backup_full.sh
+     - Backup de /var/log todos los días a las 00:00
+     - Backup de /www_dir Lun, Mié, Vie a las 23:00
+
+                                ▼
+                   /backup_dir (destino de backups)
+
+                                ▼
+               GitHub repo con archivos comprimidos:
+    - root.tar.gz, etc.tar.gz, opt.tar.gz, proc.tar.gz
+    - www_dir.tar.gz, backup_dir.tar.gz
+    - var_part_aa, var_part_ab, ... (spliteado)
+
